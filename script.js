@@ -89,7 +89,7 @@ let monthlyOverviewChartCanvas;
 //    INITIALIZE DOM ELEMENTS
 
 
-function initializeDOMElements() {
+const initializeDOMElements =() =>{
 
     
     //    SUMMARY
@@ -294,7 +294,7 @@ function initializeDOMElements() {
 //    CURRENCY FORMATTER
 
 
-function formatCurrency(amount) {
+const formatCurrency =(amount)=> {
 
     const numericAmount =
         Number(amount) || 0;
@@ -315,7 +315,7 @@ function formatCurrency(amount) {
 //    GENERATE TRANSACTION ID
 
 
-function generateTransactionId() {
+const  generateTransactionId =() =>{
 
     if (
         typeof crypto !== "undefined" &&
@@ -338,7 +338,7 @@ function generateTransactionId() {
 //    GET TODAY'S DATE
 
 
-function getTodayDate() {
+const getTodayDate =() =>{
 
     const today = new Date();
 
@@ -363,7 +363,7 @@ function getTodayDate() {
 //    SET DEFAULT DATE
 
 
-function setDefaultDate() {
+const setDefaultDate =()=> {
 
     if (
         transactionDateInput &&
@@ -380,7 +380,7 @@ function setDefaultDate() {
 //    LOAD TRANSACTIONS
 
 
-function loadTransactions() {
+const loadTransactions = async() => {
 
     try {
 
@@ -391,7 +391,7 @@ function loadTransactions() {
 
         if (!savedTransactions) {
 
-            transactions = [];
+           transactions = [];
 
             return;
         }
@@ -470,11 +470,11 @@ function loadTransactions() {
 //    SAVE TRANSACTIONS
 
 
-function saveTransactions() {
+const saveTransactions = async() =>{
 
     try {
 
-        localStorage.setItem(
+       await localStorage.setItem(
             STORAGE_KEY,
             JSON.stringify(transactions)
         );
@@ -497,12 +497,12 @@ function saveTransactions() {
 //    LOAD MONTHLY BUDGET
 
 
-function loadBudget() {
+const loadBudget = async()=> {
 
     try {
 
         const savedBudget =
-            localStorage.getItem(
+          await  localStorage.getItem(
                 BUDGET_STORAGE_KEY
             );
 
@@ -544,11 +544,11 @@ function loadBudget() {
 //    SAVE BUDGET
 
 
-function saveBudget() {
+const saveBudget = async() =>{
 
     try {
 
-        localStorage.setItem(
+       await localStorage.setItem(
             BUDGET_STORAGE_KEY,
             String(monthlyBudget)
         );
@@ -571,7 +571,7 @@ function saveBudget() {
 //    UPDATE SUMMARY
 
 
-function updateSummary() {
+const updateSummary =()=> {
 
     const totalIncome =
         transactions
@@ -648,7 +648,7 @@ function updateSummary() {
 //    FORMAT TRANSACTION DATE
 
 
-function formatDate(dateString) {
+const formatDate =(dateString) =>{
 
     if (!dateString) {
 
@@ -683,7 +683,7 @@ function formatDate(dateString) {
 //    GET FILTERED TRANSACTIONS
 
 
-function getFilteredTransactions() {
+const getFilteredTransactions =()=> {
 
     const searchTerm =
         searchInput
@@ -908,7 +908,7 @@ function getFilteredTransactions() {
 //    ESCAPE HTML
 
 
-function escapeHTML(value) {
+const escapeHTML =(value) =>{
 
     return String(value ?? "")
         .replace(/&/g, "&amp;")
@@ -923,7 +923,7 @@ function escapeHTML(value) {
 //    RENDER TRANSACTIONS
 
 
-function renderTransactions() {
+const renderTransactions =()=> {
 
     if (!transactionsTableBody) {
 
@@ -1075,7 +1075,7 @@ function renderTransactions() {
 //    POPULATE CATEGORY FILTER
 
 
-function populateCategoryFilter() {
+const populateCategoryFilter =()=> {
 
     if (!categoryFilter) {
 
@@ -1149,9 +1149,9 @@ function populateCategoryFilter() {
 //    OPEN TRANSACTION MODAL
 
 
-function openTransactionModal(
+const openTransactionModal =(
     transaction = null
-) {
+)=> {
 
     if (
         !transactionModal ||
@@ -1266,7 +1266,7 @@ function openTransactionModal(
 //    CLOSE TRANSACTION MODAL
 
 
-function closeTransactionModal() {
+const closeTransactionModal =()=> {
 
     if (!transactionModal) {
 
@@ -1305,7 +1305,7 @@ function closeTransactionModal() {
 //    SAVE TRANSACTION
 
 
-function handleTransactionSubmit(event) {
+const handleTransactionSubmit =(event) =>{
 
     event.preventDefault();
 
@@ -1478,7 +1478,7 @@ function handleTransactionSubmit(event) {
 //    OPEN DELETE MODAL
 
 
-function openDeleteModal(transactionId) {
+const openDeleteModal =(transactionId) => {
 
     if (!deleteModal) {
 
@@ -1515,7 +1515,7 @@ function openDeleteModal(transactionId) {
 //    CLOSE DELETE MODAL
 
 
-function closeDeleteModal() {
+const closeDeleteModal =()=> {
 
     if (!deleteModal) {
 
@@ -1538,7 +1538,7 @@ function closeDeleteModal() {
 //    CONFIRM DELETE
 
 
-function confirmDeleteTransaction() {
+const confirmDeleteTransaction =()=> {
 
     if (!transactionBeingDeleted) {
 
@@ -1572,7 +1572,7 @@ function confirmDeleteTransaction() {
 //    CLEAR FILTERS
 
 
-function clearFilters() {
+const clearFilters =() =>{
 
     if (searchInput) {
 
@@ -1597,7 +1597,7 @@ function clearFilters() {
 //    GET CURRENT MONTH TRANSACTIONS
 
 
-function getCurrentMonthTransactions() {
+const getCurrentMonthTransactions =() =>{
 
     const today = new Date();
 
@@ -1639,7 +1639,7 @@ function getCurrentMonthTransactions() {
 //    GET CURRENT MONTH EXPENSES
 
 
-function getCurrentMonthExpenses() {
+const getCurrentMonthExpenses =() =>{
 
     return getCurrentMonthTransactions()
         .filter(
@@ -1661,7 +1661,7 @@ function getCurrentMonthExpenses() {
 //    UPDATE BUDGET DISPLAY
 
 
-function updateBudgetDisplay() {
+const updateBudgetDisplay =()=> {
 
     if (
         !budgetAmountElement ||
@@ -1812,7 +1812,7 @@ function updateBudgetDisplay() {
 //    OPEN BUDGET MODAL
 
 
-function openBudgetModal() {
+const openBudgetModal =()=> {
 
     if (
         !budgetModal ||
@@ -1845,7 +1845,7 @@ function openBudgetModal() {
 //    CLOSE BUDGET MODAL
 
 
-function closeBudgetModal() {
+const closeBudgetModal =()=> {
 
     if (!budgetModal) {
 
@@ -1872,7 +1872,7 @@ function closeBudgetModal() {
 //    SAVE NEW BUDGET
 
 
-function handleBudgetSubmit(event) {
+const handleBudgetSubmit =(event)=> {
 
     event.preventDefault();
 
@@ -1914,7 +1914,7 @@ function handleBudgetSubmit(event) {
 //    UPDATE ALL ANALYTICS
 
 
-function updateAnalytics() {
+const updateAnalytics =()=> {
 
     updateIncomeExpenseChart();
 
@@ -1927,7 +1927,7 @@ function updateAnalytics() {
 //    INCOME VS EXPENSES CHART
 
 
-function updateIncomeExpenseChart() {
+const updateIncomeExpenseChart =()=> {
 
     if (
         !incomeExpenseChartCanvas ||
@@ -2054,7 +2054,7 @@ function updateIncomeExpenseChart() {
 //    EXPENSE CATEGORY CHART
 
 
-function updateExpenseCategoryChart() {
+const updateExpenseCategoryChart =() => {
 
     if (
         !expenseCategoryChartCanvas ||
@@ -2191,7 +2191,7 @@ function updateExpenseCategoryChart() {
 //    GET MONTHLY FINANCIAL DATA
 
 
-function getMonthlyFinancialData() {
+const getMonthlyFinancialData =()=> {
 
     const monthlyData = {};
 
@@ -2256,7 +2256,7 @@ function getMonthlyFinancialData() {
 //    MONTHLY OVERVIEW CHART
 
 
-function updateMonthlyOverviewChart() {
+const updateMonthlyOverviewChart =()=> {
 
     if (
         !monthlyOverviewChartCanvas ||
@@ -2438,7 +2438,7 @@ function updateMonthlyOverviewChart() {
 //    EVENT LISTENERS
 
 
-function initializeEventListeners() {
+const initializeEventListeners =()=> {
 
 
     //    ADD TRANSACTION BUTTONS
@@ -2816,7 +2816,7 @@ function initializeEventListeners() {
 //    INITIALIZE APPLICATION
 
 
-function initializeApp() {
+const initializeApp =()=> {
 
     /* FIRST: Find all HTML elements */
 
